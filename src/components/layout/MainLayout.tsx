@@ -6,11 +6,12 @@ import {
 import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
 import React, { useState } from 'react'
-import { MDConverter } from '../../utils/MDConverter'
-import { TextEdit } from '../ui/TextEdit/TextEdit'
+
+import { Workspace } from '../screens/Workspace/Workspace'
+
 import styles from './MainLayout.module.scss'
 
-const { Header, Content, Footer, Sider } = Layout
+const { Sider } = Layout
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -53,17 +54,7 @@ export const MainLayout: React.FC = () => {
         />
       </Sider>
       <Layout className={styles.siteLayout}>
-        <Header className={styles.siteLayoutBg} style={{ padding: 0 }} />
-        <Content style={{ margin: '16px' }}>
-          <div
-            className={styles.siteLayoutBg}
-            style={{ padding: 24, minHeight: 360 }}
-          >
-            <TextEdit />
-            <MDConverter />
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>©2018 Created by</Footer>
+        <Workspace />
       </Layout>
     </Layout>
   )
