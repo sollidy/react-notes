@@ -20,7 +20,7 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
   stopEdit,
 }) => {
   const { currentNoteId } = useNotesContext()
-  const { deleteNote, createNote } = useDb()
+  const { deleteNote } = useDb()
 
   const handleDeleteNote = () => {
     if (currentNoteId) {
@@ -30,7 +30,6 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
 
   const handleCreateNote = () => {
     stopEdit()
-    createNote()
   }
 
   return (
