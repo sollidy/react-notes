@@ -1,6 +1,7 @@
 import Dexie, { Table } from 'dexie'
 
 import { Notes } from './notes'
+import { populate } from './populate'
 
 export class NotesDb extends Dexie {
   notes!: Table<Notes>
@@ -8,15 +9,11 @@ export class NotesDb extends Dexie {
   constructor() {
     super('notesDb')
     this.version(2).stores({
-      notes: '++id, title, text, createdAt', // Primary key and indexed props
+      notes: '++id, title, text, createdAt',
     })
   }
 }
 
 export const db = new NotesDb()
 
-export function resetDatabase() {
-  return db.transaction('rw', db.tables, async () => {
-    await Promise.all(db.tables.map((table) => table.clear()))
-  })
-}
+db.on('populate', populate)
