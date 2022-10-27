@@ -4,11 +4,22 @@
 
   > .workspaceHeader {
     height: 100%;
-    margin-right: 48px;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 14px;
+    justify-content: space-between;
+
+    > .search {
+      display: flex;
+      align-items: center;
+      margin-left: 18px;
+    }
+
+    > .buttons {
+      margin-right: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+    }
   }
 }
 .content {
