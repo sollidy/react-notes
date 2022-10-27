@@ -1,6 +1,7 @@
 import { Layout } from 'antd'
 import { FC } from 'react'
 
+import { useNoteText } from '../../../hooks/useNoteText'
 import { MDConverter } from '../../../utils/MDConverter'
 import { TextEdit } from '../../ui/TextEdit/TextEdit'
 
@@ -12,6 +13,8 @@ const { Header, Content, Footer } = Layout
 
 export const Workspace: FC = () => {
   const { isEdit, beginEdit, stopEdit } = useWorkspace()
+  const { noteText, setNoteText } = useNoteText()
+  console.log(noteText)
   return (
     <>
       <Header className={styles.header}>
@@ -23,7 +26,7 @@ export const Workspace: FC = () => {
       </Header>
       <Content className={styles.content}>
         <div className={styles.contentContainer}>
-          {isEdit ? <TextEdit /> : <MDConverter />}
+          {isEdit ? <TextEdit setNoteText={setNoteText} /> : <MDConverter />}
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>©2018 Created by</Footer>
