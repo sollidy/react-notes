@@ -28,7 +28,7 @@ export const useDb = () => {
     db.notes.delete(id)
   }
 
-  const getAllNotes = useLiveQuery(() => db.notes?.toArray())
+  const getAllNotes = useLiveQuery(async () => await db.notes.toArray())
 
   return {
     getAllNotes,

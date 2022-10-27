@@ -4,7 +4,6 @@ import { Layout } from 'antd'
 import { FC, useState } from 'react'
 
 import { useDb } from '../../../hooks/useDb'
-import { getMenuItem } from '../../../utils/getMenuItem'
 
 import styles from './SideBar.module.scss'
 
@@ -15,9 +14,15 @@ export const SideBar: FC = () => {
 
   const { getAllNotes } = useDb()
 
-  const notesList = getAllNotes?.map((note) => {
-    return getMenuItem(note.title, note.id!, <FileTextOutlined />)
-  })
+  const menuItems = getAllNotes?.map((note) => ({
+    label: note.title,
+    key: note.id!.toString(),
+    icon: <FileTextOutlined />,
+  }))
+
+  if (!menuItems) return null
+
+  const firstMenuItem = menuItems[0].key
 
   return (
     <Sider
@@ -28,9 +33,9 @@ export const SideBar: FC = () => {
       <div className={styles.logo} />
       <Menu
         theme="dark"
-        defaultSelectedKeys={['1']}
         mode="inline"
-        items={notesList}
+        items={menuItems}
+        defaultSelectedKeys={[firstMenuItem]}
       />
     </Sider>
   )
