@@ -4,19 +4,19 @@ import { FC } from 'react'
 import styles from './WorkspaceHeader.module.scss'
 
 interface IWorkHeader {
-  beginEdit: () => void
+  startEdit: () => void
   stopEdit: () => void
   isEdit: boolean
 }
 
 export const WorkspaceHeader: FC<IWorkHeader> = ({
   isEdit,
-  beginEdit,
+  startEdit,
   stopEdit,
 }) => {
   return (
     <div className={styles.workspaceHeader}>
-      <Button onClick={beginEdit} disabled={isEdit}>
+      <Button onClick={startEdit} disabled={isEdit}>
         Edit Note
       </Button>
       <Button onClick={stopEdit} disabled={!isEdit} type="primary">

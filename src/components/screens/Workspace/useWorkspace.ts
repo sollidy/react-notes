@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 export const useWorkspace = () => {
   const [isEdit, setIsEdit] = useState(false)
-  const beginEdit = () => {
+  const startEdit = () => {
     setIsEdit(true)
   }
   const stopEdit = () => {
@@ -10,7 +10,7 @@ export const useWorkspace = () => {
   }
   return {
     isEdit,
-    beginEdit,
+    startEdit,
     stopEdit,
   }
 }

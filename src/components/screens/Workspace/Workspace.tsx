@@ -13,7 +13,7 @@ import { useWorkspace } from './useWorkspace'
 const { Header, Content, Footer } = Layout
 
 export const Workspace: FC = () => {
-  const { isEdit, beginEdit, stopEdit } = useWorkspace()
+  const { isEdit, startEdit, stopEdit } = useWorkspace()
   const { noteText, setNoteText } = useNoteText()
   const { createNote, getAllNotes } = useDb()
 
@@ -28,7 +28,7 @@ export const Workspace: FC = () => {
       <Header className={styles.header}>
         <WorkspaceHeader
           isEdit={isEdit}
-          beginEdit={beginEdit}
+          startEdit={startEdit}
           stopEdit={stopEdit}
         />
       </Header>
