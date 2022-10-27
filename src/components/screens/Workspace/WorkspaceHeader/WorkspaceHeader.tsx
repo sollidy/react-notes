@@ -1,6 +1,9 @@
 import { Button } from 'antd'
 import { FC } from 'react'
 
+import { useDb } from '../../../../hooks/useDb'
+import { useWorkspace } from '../useWorkspace'
+
 import styles from './WorkspaceHeader.module.scss'
 
 interface IWorkHeader {
@@ -14,15 +17,38 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
   startEdit,
   stopEdit,
 }) => {
+  const { currentNoteId, setCurrentNoteId } = useWorkspace()
+  const { deleteNote, createNote } = useDb()
+
+  const handleDeleteNote = () => {
+    if (currentNoteId) {
+      deleteNote(currentNoteId)
+    }
+  }
+
+  const handleCreateNote = () => {
+    stopEdit()
+    createNote()
+  }
+
   return (
     <div className={styles.workspaceHeader}>
-      <Button onClick={startEdit} disabled={isEdit}>
+      <Button onClick={startEdit} disabled={isEdit && !currentNoteId}>
         Edit Note
       </Button>
-      <Button onClick={stopEdit} disabled={!isEdit} type="primary">
+      <Button
+        onClick={handleCreateNote}
+        disabled={!isEdit && !currentNoteId}
+        type="primary"
+      >
         Save
       </Button>
-      <Button type="primary" danger>
+      <Button
+        type="primary"
+        onClick={handleDeleteNote}
+        danger
+        disabled={!currentNoteId}
+      >
         Delete
       </Button>
     </div>

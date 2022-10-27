@@ -1,28 +1,21 @@
-import { Layout } from 'antd'
+import { Empty, Layout } from 'antd'
 import { FC } from 'react'
 
-import { useDb } from '../../../hooks/useDb'
-import { useNoteText } from '../../../hooks/useNoteText'
-import { MDConverter } from '../../../utils/MDConverter'
-import { TextEdit } from '../../ui/TextEdit/TextEdit'
-
 import styles from './Workspace.module.scss'
+import { WorkspaceContent } from './WorkspaceContent'
 import { WorkspaceHeader } from './WorkspaceHeader/WorkspaceHeader'
 import { useWorkspace } from './useWorkspace'
 
-const { Header, Content, Footer } = Layout
+const { Header, Footer } = Layout
 
 export const Workspace: FC = () => {
-  const { isEdit, startEdit, stopEdit } = useWorkspace()
-  const { noteText, setNoteText } = useNoteText()
-  const { createNote, getAllNotes } = useDb()
+  const { isEdit, startEdit, stopEdit, currentNoteId, allNotes } =
+    useWorkspace()
 
-  const tempClick = () => {
-    createNote('ttt', '222')
-  }
-  // resetDatabase()
-  console.log('NoteText', noteText)
-  console.log('DbNotes', getAllNotes)
+  // console.log('NoteText', noteText)
+  // console.log('DbNotes', allNotes)
+  console.log('currentNoteId', currentNoteId)
+
   return (
     <>
       <Header className={styles.header}>
@@ -32,14 +25,9 @@ export const Workspace: FC = () => {
           stopEdit={stopEdit}
         />
       </Header>
-      <Content className={styles.content}>
-        <div className={styles.contentContainer}>
-          {isEdit ? <TextEdit setNoteText={setNoteText} /> : <MDConverter />}
-        </div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }} onClick={tempClick}>
-        ©2018 Created by
-      </Footer>
+      <WorkspaceContent isEdit={isEdit} />
+
+      <Footer style={{ textAlign: 'center' }}>©2018 Created by</Footer>
     </>
   )
 }

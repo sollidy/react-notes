@@ -1,4 +1,7 @@
+import { Notes } from '../db/notes'
+
 export interface INotesContext {
-  noteText: string
-  setNoteText: (noteText: string) => void
+  currentNoteId: number | undefined
+  setCurrentNoteId: (id: number) => void
+  allNotes: Notes[] | undefined
 }

@@ -1,16 +1,18 @@
 import { FC, ReactNode } from 'react'
 import { createContext } from 'react'
 
-import { useNoteText } from '../hooks/useNoteText'
+import { useDataForContext } from '../hooks/useDataForContext'
 
 import { INotesContext } from './context.interface'
 
 export const NotesContext = createContext<INotesContext>({} as INotesContext)
 
 export const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const { noteText, setNoteText } = useNoteText()
+  const { currentNoteId, setCurrentNoteId, allNotes } = useDataForContext()
   return (
-    <NotesContext.Provider value={{ noteText, setNoteText }}>
+    <NotesContext.Provider
+      value={{ currentNoteId, setCurrentNoteId, allNotes }}
+    >
       {children}
     </NotesContext.Provider>
   )
