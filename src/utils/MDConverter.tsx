@@ -5,7 +5,7 @@ interface IMDConverter {
   md?: string
 }
 
-export const MDConverter: FC<IMDConverter> = ({ md = '# New note' }) => {
+export const MDConverter: FC<IMDConverter> = ({ md = '' }) => {
   const getMarkdownText = (mdText: string) => {
     const rawMarkup = marked(mdText)
     return { __html: rawMarkup }

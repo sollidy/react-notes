@@ -1,6 +1,7 @@
 import { Layout } from 'antd'
 import { FC } from 'react'
 
+import { useDb } from '../../../hooks/useDb'
 import { useNoteText } from '../../../hooks/useNoteText'
 import { MDConverter } from '../../../utils/MDConverter'
 import { TextEdit } from '../../ui/TextEdit/TextEdit'
@@ -14,7 +15,14 @@ const { Header, Content, Footer } = Layout
 export const Workspace: FC = () => {
   const { isEdit, beginEdit, stopEdit } = useWorkspace()
   const { noteText, setNoteText } = useNoteText()
-  console.log(noteText)
+  const { createNote, getAllNotes } = useDb()
+
+  const tempClick = () => {
+    createNote('ttt', '222')
+  }
+  // resetDatabase()
+  console.log('NoteText', noteText)
+  console.log('DbNotes', getAllNotes)
   return (
     <>
       <Header className={styles.header}>
@@ -29,7 +37,9 @@ export const Workspace: FC = () => {
           {isEdit ? <TextEdit setNoteText={setNoteText} /> : <MDConverter />}
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>©2018 Created by</Footer>
+      <Footer style={{ textAlign: 'center' }} onClick={tempClick}>
+        ©2018 Created by
+      </Footer>
     </>
   )
 }
