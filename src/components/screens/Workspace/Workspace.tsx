@@ -18,8 +18,7 @@ export const Workspace: FC = () => {
         stopEdit={stopEdit}
       />
       <WorkspaceContent isEdit={isEdit} />
-
-      <Footer style={{ textAlign: 'center' }}>©2018 Created by</Footer>
+      {/* <Footer style={{ textAlign: 'center' }}>©2018 Created by</Footer> */}
     </>
   )
 }
