@@ -19,12 +19,13 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
   startEdit,
   stopEdit,
 }) => {
-  const { currentNoteId } = useNotesContext()
+  const { currentNoteId, setFirstNote } = useNotesContext()
   const { deleteNote } = useDb()
 
   const handleDeleteNote = () => {
     if (currentNoteId) {
       deleteNote(currentNoteId)
+      setFirstNote()
     }
   }
 

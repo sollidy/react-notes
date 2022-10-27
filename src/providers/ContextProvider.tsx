@@ -8,10 +8,22 @@ import { INotesContext } from './context.interface'
 export const NotesContext = createContext<INotesContext>({} as INotesContext)
 
 export const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const { currentNoteId, setCurrentNoteId, allNotes } = useDataForContext()
+  const {
+    currentNoteId,
+    setCurrentNoteId,
+    allNotes,
+    getCurrentNote,
+    setFirstNote,
+  } = useDataForContext()
   return (
     <NotesContext.Provider
-      value={{ currentNoteId, setCurrentNoteId, allNotes }}
+      value={{
+        currentNoteId,
+        setCurrentNoteId,
+        allNotes,
+        getCurrentNote,
+        setFirstNote,
+      }}
     >
       {children}
     </NotesContext.Provider>
