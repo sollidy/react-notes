@@ -3,12 +3,11 @@ import { FC } from 'react'
 
 import { useNotesContext } from '../../../hooks/useNotesContext'
 
-import styles from './Workspace.module.scss'
 import { WorkspaceContent } from './WorkspaceContent'
-import { WorkspaceHeader } from './WorkspaceHeader/WorkspaceHeader'
+import { WorkspaceHeader } from './WorkspaceHeader'
 import { useWorkspace } from './useWorkspace'
 
-const { Header, Footer } = Layout
+const { Footer } = Layout
 
 export const Workspace: FC = () => {
   const { isEdit, startEdit, stopEdit } = useWorkspace()
@@ -20,13 +19,11 @@ export const Workspace: FC = () => {
 
   return (
     <>
-      <Header className={styles.header}>
-        <WorkspaceHeader
-          isEdit={isEdit}
-          startEdit={startEdit}
-          stopEdit={stopEdit}
-        />
-      </Header>
+      <WorkspaceHeader
+        isEdit={isEdit}
+        startEdit={startEdit}
+        stopEdit={stopEdit}
+      />
       <WorkspaceContent isEdit={isEdit} />
 
       <Footer style={{ textAlign: 'center' }}>©2018 Created by</Footer>

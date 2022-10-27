@@ -1,9 +1,19 @@
 .header {
   background: white !important;
   padding: 0 !important;
+
+  > .workspaceHeader {
+    height: 100%;
+    margin-right: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+  }
 }
 .content {
   margin: 16px !important;
+
   > .contentContainer {
     background-color: white;
     padding: 24px;
