@@ -1,11 +1,11 @@
 import { marked } from 'marked'
 import { FC } from 'react'
 
-interface IMDConverter {
+interface ITextView {
   md?: string
 }
 
-export const MDConverter: FC<IMDConverter> = ({ md = '' }) => {
+export const TextView: FC<ITextView> = ({ md = '' }) => {
   const getMarkdownText = (mdText: string) => {
     const rawMarkup = marked(mdText)
     return { __html: rawMarkup }

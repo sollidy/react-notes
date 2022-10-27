@@ -1,8 +1,9 @@
 import { FC } from 'react'
 
-import { useNotesContext } from '../../../../hooks/useNotesContext'
-import { MDConverter } from '../../../../utils/MDConverter'
-import { TextEdit } from '../../../ui/TextEdit/TextEdit'
+import { useNotesContext } from '../../../../../hooks/useNotesContext'
+
+import { TextEdit } from './TextEdit'
+import { TextView } from './TextView'
 
 interface ITextContainer {
   isEdit: boolean
@@ -13,5 +14,5 @@ export const TextContainer: FC<ITextContainer> = ({ isEdit }) => {
   const currentNote = getCurrentNote()
   if (!currentNote) return null
 
-  return <>{isEdit ? <TextEdit /> : <MDConverter md={currentNote.text} />}</>
+  return <>{isEdit ? <TextEdit /> : <TextView md={currentNote.text} />}</>
 }

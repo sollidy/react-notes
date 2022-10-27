@@ -2,10 +2,10 @@ import { Empty, Layout } from 'antd'
 import { FC } from 'react'
 
 import { useNotesContext } from '../../../../hooks/useNotesContext'
-import { EditableTitle } from '../../../ui/EditableTitle'
 
 import styles from './../Workspace.module.scss'
-import { TextContainer } from './TextContainer'
+import { TextContainer } from './TextContainer/TextContainer'
+import { TitleEdit } from './TitleEdit'
 
 const { Content } = Layout
 interface IWorkspaceContent {
@@ -22,7 +22,7 @@ export const WorkspaceContent: FC<IWorkspaceContent> = ({ isEdit }) => {
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         ) : (
           <>
-            <EditableTitle />
+            <TitleEdit />
             <TextContainer isEdit={isEdit} />
           </>
         )}

@@ -2,9 +2,9 @@ import 'easymde/dist/easymde.min.css'
 import { FC, useCallback, useEffect, useState } from 'react'
 import { SimpleMdeReact } from 'react-simplemde-editor'
 
-import { customRendererOptions } from '../../../config/simplemde.config'
-import { useAutoSaveText } from '../../../hooks/useAutoSaveText'
-import { useNotesContext } from '../../../hooks/useNotesContext'
+import { customRendererOptions } from '../../../../../config/simplemde.config'
+import { useAutoSaveText } from '../../../../../hooks/useAutoSaveText'
+import { useNotesContext } from '../../../../../hooks/useNotesContext'
 
 export const TextEdit: FC = () => {
   const [value, setValue] = useState('')

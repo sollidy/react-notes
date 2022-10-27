@@ -1,10 +1,10 @@
 import { Typography } from 'antd'
 import { FC } from 'react'
 
-import { useDb } from '../../hooks/useDb'
-import { useNotesContext } from '../../hooks/useNotesContext'
+import { useDb } from '../../../../hooks/useDb'
+import { useNotesContext } from '../../../../hooks/useNotesContext'
 
-export const EditableTitle: FC = () => {
+export const TitleEdit: FC = () => {
   const { getCurrentNote } = useNotesContext()
   const currentNote = getCurrentNote()
   const { editNote } = useDb()

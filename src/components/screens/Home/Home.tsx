@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { resetDatabase } from '../../../db/reset'
+// import { resetDatabase } from '../../../db/reset'
 import { ContextProvider } from '../../../providers/ContextProvider'
 import { MainLayout } from '../../layout/MainLayout'
 
