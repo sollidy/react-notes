@@ -43,14 +43,6 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
   return (
     <Header className={styles.header}>
       <div className={styles.workspaceHeader}>
-        <div className={styles.search}>
-          <Search
-            disabled={!currentNoteId}
-            placeholder="input search text"
-            onSearch={(value) => setSearch(value)}
-            enterButton
-          />
-        </div>
         <div className={styles.buttons}>
           <Button onClick={startEdit} disabled={isEdit || !currentNoteId}>
             Edit Note
@@ -70,6 +62,15 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
           >
             Delete
           </Button>
+        </div>
+        <div className={styles.search}>
+          <Search
+            allowClear
+            disabled={!currentNoteId}
+            placeholder="input search text"
+            onSearch={(value) => setSearch(value)}
+            enterButton
+          />
         </div>
       </div>
     </Header>
