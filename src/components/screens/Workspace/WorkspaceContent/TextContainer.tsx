@@ -9,11 +9,9 @@ interface ITextContainer {
 }
 
 export const TextContainer: FC<ITextContainer> = ({ isEdit }) => {
-  const { allNotes, currentNoteId } = useNotesContext()
+  const { getCurrentNote } = useNotesContext()
+  const currentNote = getCurrentNote()
+  if (!currentNote) return null
 
-  const currentNote = allNotes?.filter((note) => note.id === currentNoteId)
-  const currentNoteText =
-    currentNote && currentNote?.length > 0 ? currentNote[0].text : ''
-
-  return <>{isEdit ? <TextEdit /> : <MDConverter md={currentNoteText} />}</>
+  return <>{isEdit ? <TextEdit /> : <MDConverter md={currentNote.text} />}</>
 }

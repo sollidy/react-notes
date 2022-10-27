@@ -17,7 +17,7 @@ export const EditableTitle: FC = () => {
 
   return (
     <Typography.Title
-      editable={{ maxLength: 50, onChange: editTitle }}
+      editable={{ maxLength: 28, onChange: editTitle }}
       level={1}
     >
       {currentNote.title}
