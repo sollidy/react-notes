@@ -1,4 +1,4 @@
-import { Button, Layout } from 'antd'
+import { Button, Layout, Modal } from 'antd'
 import Search from 'antd/lib/input/Search'
 import { FC } from 'react'
 
@@ -8,6 +8,7 @@ import { useNotesContext } from '../../../hooks/useNotesContext'
 import styles from './Workspace.module.scss'
 
 const { Header } = Layout
+const { confirm } = Modal
 
 interface IWorkHeader {
   startEdit: () => void
@@ -23,15 +24,20 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
   const { currentNoteId, setFirstNote } = useNotesContext()
   const { deleteNote } = useDb()
 
-  const handleDeleteNote = () => {
-    if (currentNoteId) {
-      deleteNote(currentNoteId)
-      setFirstNote()
-    }
-  }
-
-  const handleCreateNote = () => {
-    stopEdit()
+  function showDeleteConfirm() {
+    confirm({
+      title: 'Are you sure delete this note?',
+      content: 'It is unrevokable',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        if (currentNoteId) {
+          deleteNote(currentNoteId)
+          setFirstNote()
+        }
+      },
+    })
   }
 
   return (
@@ -49,7 +55,7 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
             Edit Note
           </Button>
           <Button
-            onClick={handleCreateNote}
+            onClick={() => stopEdit()}
             disabled={!isEdit || !currentNoteId}
             type="primary"
           >
@@ -57,7 +63,7 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
           </Button>
           <Button
             type="primary"
-            onClick={handleDeleteNote}
+            onClick={showDeleteConfirm}
             danger
             disabled={!currentNoteId}
           >
