@@ -3,9 +3,9 @@ import { FC } from 'react'
 
 import { useNotesContext } from '../../../../hooks/useNotesContext'
 
-import styles from './../Workspace.module.scss'
 import { TextContainer } from './TextContainer/TextContainer'
 import { TitleEdit } from './TitleEdit'
+import styles from './WorkspaceContent.module.scss'
 
 const { Content } = Layout
 interface IWorkspaceContent {

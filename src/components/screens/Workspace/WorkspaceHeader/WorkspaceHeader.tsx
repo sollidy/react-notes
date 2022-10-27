@@ -2,10 +2,10 @@ import { Button, Layout, Modal } from 'antd'
 import Search from 'antd/lib/input/Search'
 import { FC } from 'react'
 
-import { useDb } from '../../../hooks/useDb'
-import { useNotesContext } from '../../../hooks/useNotesContext'
+import { useDb } from '../../../../hooks/useDb'
+import { useNotesContext } from '../../../../hooks/useNotesContext'
 
-import styles from './Workspace.module.scss'
+import styles from './WorkspaceHeader.module.scss'
 
 const { Header } = Layout
 const { confirm } = Modal
