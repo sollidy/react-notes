@@ -1,5 +1,7 @@
-import { Empty, Layout } from 'antd'
+import { Layout } from 'antd'
 import { FC } from 'react'
+
+import { useNotesContext } from '../../../hooks/useNotesContext'
 
 import styles from './Workspace.module.scss'
 import { WorkspaceContent } from './WorkspaceContent'
@@ -9,8 +11,8 @@ import { useWorkspace } from './useWorkspace'
 const { Header, Footer } = Layout
 
 export const Workspace: FC = () => {
-  const { isEdit, startEdit, stopEdit, currentNoteId, allNotes } =
-    useWorkspace()
+  const { isEdit, startEdit, stopEdit } = useWorkspace()
+  const { currentNoteId } = useNotesContext()
 
   // console.log('NoteText', noteText)
   // console.log('DbNotes', allNotes)

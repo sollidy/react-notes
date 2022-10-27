@@ -1,9 +1,6 @@
-import { useContext, useState } from 'react'
-
-import { NotesContext } from '../../../providers/ContextProvider'
+import { useState } from 'react'
 
 export const useWorkspace = () => {
-  const { currentNoteId, allNotes, setCurrentNoteId } = useContext(NotesContext)
   const [isEdit, setIsEdit] = useState(false)
   const startEdit = () => {
     setIsEdit(true)
@@ -16,8 +13,5 @@ export const useWorkspace = () => {
     isEdit,
     startEdit,
     stopEdit,
-    currentNoteId,
-    allNotes,
-    setCurrentNoteId,
   }
 }

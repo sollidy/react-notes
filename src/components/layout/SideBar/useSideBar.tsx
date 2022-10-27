@@ -1,10 +1,9 @@
 import { FileTextOutlined } from '@ant-design/icons'
-import { useContext } from 'react'
 
-import { NotesContext } from '../../../providers/ContextProvider'
+import { useNotesContext } from '../../../hooks/useNotesContext'
 
 export const useSideBar = () => {
-  const { allNotes } = useContext(NotesContext)
+  const { allNotes } = useNotesContext()
 
   const menuItems = allNotes?.map((note) => ({
     label: note.title,

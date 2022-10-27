@@ -2,7 +2,7 @@ import { Button } from 'antd'
 import { FC } from 'react'
 
 import { useDb } from '../../../../hooks/useDb'
-import { useWorkspace } from '../useWorkspace'
+import { useNotesContext } from '../../../../hooks/useNotesContext'
 
 import styles from './WorkspaceHeader.module.scss'
 
@@ -17,7 +17,7 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
   startEdit,
   stopEdit,
 }) => {
-  const { currentNoteId, setCurrentNoteId } = useWorkspace()
+  const { currentNoteId } = useNotesContext()
   const { deleteNote, createNote } = useDb()
 
   const handleDeleteNote = () => {
