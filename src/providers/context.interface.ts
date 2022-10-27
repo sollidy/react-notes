@@ -6,4 +6,5 @@ export interface INotesContext {
   allNotes: Notes[] | undefined
   getCurrentNote: () => Notes | undefined
   setFirstNote: () => void
+  setSearch: (term: string) => void
 }

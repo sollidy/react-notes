@@ -5,6 +5,7 @@ import { useDb } from './useDb'
 export const useDataForContext = () => {
   const [current, setCurrent] = useState<number | undefined>(undefined)
   const [loadNotes, setLoadNotes] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
   const { getAllNotes } = useDb()
 
   useEffect(() => {
@@ -31,12 +32,20 @@ export const useDataForContext = () => {
   const getCurrentNote = () => {
     return getAllNotes?.find((note) => note.id === current)
   }
+  const getNotes = searchTerm
+    ? getAllNotes?.filter((note) => note.text.includes(searchTerm))
+    : getAllNotes
+
+  const setSearch = (term: string) => {
+    setSearchTerm(term)
+  }
 
   return {
     currentNoteId: current,
     setCurrentNoteId,
-    allNotes: getAllNotes,
+    allNotes: getNotes,
     getCurrentNote,
     setFirstNote,
+    setSearch,
   }
 }

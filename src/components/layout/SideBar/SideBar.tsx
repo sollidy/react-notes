@@ -15,10 +15,15 @@ export const SideBar: FC = () => {
   const [collapsed, setCollapsed] = useState(false)
   const { createNote } = useDb()
   const menuItems = useSideBar()
-  const { setCurrentNoteId, currentNoteId } = useNotesContext()
+  const { setCurrentNoteId, currentNoteId, setSearch } = useNotesContext()
 
   const onMenuItemSelect = (e: SelectInfo) => {
     setCurrentNoteId(Number(e.key))
+  }
+
+  const onCreateNote = () => {
+    createNote()
+    setSearch('')
   }
   const createButtonText = collapsed ? '+' : 'Create new Note'
   const selected = currentNoteId ? currentNoteId.toString() : ''
@@ -30,7 +35,7 @@ export const SideBar: FC = () => {
       onCollapse={(value) => setCollapsed(value)}
     >
       <div className={styles.logo}>
-        <Button onClick={() => createNote()}>{createButtonText}</Button>
+        <Button onClick={onCreateNote}>{createButtonText}</Button>
       </div>
       <Menu
         selectedKeys={[selected]}

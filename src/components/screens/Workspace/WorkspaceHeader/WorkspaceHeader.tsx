@@ -21,7 +21,7 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
   startEdit,
   stopEdit,
 }) => {
-  const { currentNoteId, setFirstNote } = useNotesContext()
+  const { currentNoteId, setFirstNote, setSearch } = useNotesContext()
   const { deleteNote } = useDb()
 
   function showDeleteConfirm() {
@@ -45,8 +45,9 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
       <div className={styles.workspaceHeader}>
         <div className={styles.search}>
           <Search
+            disabled={!currentNoteId}
             placeholder="input search text"
-            onSearch={(value) => console.log(value)}
+            onSearch={(value) => setSearch(value)}
             enterButton
           />
         </div>

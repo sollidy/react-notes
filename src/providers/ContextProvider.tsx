@@ -14,6 +14,7 @@ export const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     allNotes,
     getCurrentNote,
     setFirstNote,
+    setSearch,
   } = useDataForContext()
   return (
     <NotesContext.Provider
@@ -23,6 +24,7 @@ export const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         allNotes,
         getCurrentNote,
         setFirstNote,
+        setSearch,
       }}
     >
       {children}

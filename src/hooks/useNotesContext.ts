@@ -9,6 +9,7 @@ export const useNotesContext = () => {
     setCurrentNoteId,
     getCurrentNote,
     setFirstNote,
+    setSearch,
   } = useContext(NotesContext)
   return {
     currentNoteId,
@@ -16,5 +17,6 @@ export const useNotesContext = () => {
     setCurrentNoteId,
     getCurrentNote,
     setFirstNote,
+    setSearch,
   }
 }
