@@ -1,3 +1,9 @@
-# React note app
+# Create notes app - React.js frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`React`, `Typescript`, `AntDesign`, `Marked`, `Dexie`
+
+##### DEPLOY TO
+
+https://react-notes-omega.vercel.app
+
+---

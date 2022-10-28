@@ -5,12 +5,11 @@ import { useNotesContext } from './useNotesContext'
 
 export const useAutoSaveText = (value: string) => {
   const { currentNoteId } = useNotesContext()
-  const { editNote } = useDb()
+  const { editNoteDb } = useDb()
 
   useEffect(() => {
     if (currentNoteId && value) {
-      const currentId = currentNoteId
-      editNote(currentId, value)
+      editNoteDb(currentNoteId, value)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])

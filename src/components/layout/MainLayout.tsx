@@ -3,14 +3,13 @@ import { FC } from 'react'
 
 import { Workspace } from '../screens/Workspace/Workspace'
 
-import styles from './MainLayout.module.scss'
 import { SideBar } from './SideBar/SideBar'
 
 export const MainLayout: FC = () => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <SideBar />
-      <Layout className={styles.siteLayout}>
+      <Layout>
         <Workspace />
       </Layout>
     </Layout>

@@ -8,8 +8,7 @@ import { useNotesContext } from '../../../../../hooks/useNotesContext'
 
 export const TextEdit: FC = () => {
   const [value, setValue] = useState('')
-  const { getCurrentNote } = useNotesContext()
-  const currentNote = getCurrentNote()
+  const { currentNote } = useNotesContext()
 
   useEffect(() => {
     if (currentNote) setValue(currentNote.text)

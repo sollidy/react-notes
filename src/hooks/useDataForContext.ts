@@ -3,48 +3,51 @@ import { useEffect, useState } from 'react'
 import { useDb } from './useDb'
 
 export const useDataForContext = () => {
-  const [current, setCurrent] = useState<number | undefined>(undefined)
-  const [loadNotes, setLoadNotes] = useState(false)
+  const [currentId, setCurrentId] = useState<number | undefined>(undefined)
+  const [isLoadedNotes, setIsLoadedNotes] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
-  const { getAllNotes } = useDb()
+  const { getAllNotesDb } = useDb()
 
+  // For first loading to set active note
   useEffect(() => {
-    if (loadNotes) setFirstNote()
+    if (isLoadedNotes) setFirstNote()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadNotes])
+  }, [isLoadedNotes])
 
+  // After delete last note to set id to undefined
   useEffect(() => {
-    if (!getAllNotes || getAllNotes.length <= 0) {
-      setCurrent(undefined)
-      setLoadNotes(false)
-    } else setLoadNotes(true)
-  }, [getAllNotes])
+    if (!getAllNotesDb || getAllNotesDb.length <= 0) {
+      setCurrentId(undefined)
+      setIsLoadedNotes(false)
+    } else setIsLoadedNotes(true)
+  }, [getAllNotesDb])
 
+  //Only for deletion, to set new active note
   const setFirstNote = () => {
-    if (getAllNotes && getAllNotes.length > 0) setCurrent(getAllNotes[0].id)
-    else setCurrent(undefined)
+    if (getAllNotesDb && getAllNotesDb.length > 0)
+      setCurrentId(getAllNotesDb[0].id)
+    else setCurrentId(undefined)
   }
 
   const setCurrentNoteId = (id: number) => {
-    setCurrent(id)
+    setCurrentId(id)
   }
-
-  const getCurrentNote = () => {
-    return getAllNotes?.find((note) => note.id === current)
-  }
-  const getNotes = searchTerm
-    ? getAllNotes?.filter((note) => note.text.includes(searchTerm))
-    : getAllNotes
 
   const setSearch = (term: string) => {
     setSearchTerm(term)
   }
 
+  const currentNote = getAllNotesDb?.find((note) => note.id === currentId)
+
+  const allNotes = searchTerm
+    ? getAllNotesDb?.filter((note) => note.text.includes(searchTerm))
+    : getAllNotesDb
+
   return {
-    currentNoteId: current,
+    currentNoteId: currentId,
+    allNotes,
+    currentNote,
     setCurrentNoteId,
-    allNotes: getNotes,
-    getCurrentNote,
     setFirstNote,
     setSearch,
   }

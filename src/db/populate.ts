@@ -1,8 +1,8 @@
 import { db } from '.'
 
 const initialNote = {
-  title: 'New title',
-  text: '',
+  title: 'New note',
+  text: 'Sample text',
   createdAt: new Date(Date.now()),
 }
 

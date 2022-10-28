@@ -13,20 +13,20 @@ const { Sider } = Layout
 
 export const SideBar: FC = () => {
   const [collapsed, setCollapsed] = useState(false)
-  const { createNote } = useDb()
+  const { createNoteDb } = useDb()
   const menuItems = useSideBar()
   const { setCurrentNoteId, currentNoteId, setSearch } = useNotesContext()
 
-  const onMenuItemSelect = (e: SelectInfo) => {
-    setCurrentNoteId(Number(e.key))
+  const onMenuItemSelect = (selectMenu: SelectInfo) => {
+    setCurrentNoteId(Number(selectMenu.key))
   }
 
   const onCreateNote = () => {
-    createNote()
+    createNoteDb()
     setSearch('')
   }
   const createButtonText = collapsed ? '+' : 'Create new Note'
-  const selected = currentNoteId ? currentNoteId.toString() : ''
+  const selectedNote = currentNoteId ? currentNoteId.toString() : ''
 
   return (
     <Sider
@@ -40,7 +40,7 @@ export const SideBar: FC = () => {
         <Button onClick={onCreateNote}>{createButtonText}</Button>
       </div>
       <Menu
-        selectedKeys={[selected]}
+        selectedKeys={[selectedNote]}
         theme="dark"
         mode="inline"
         items={menuItems}

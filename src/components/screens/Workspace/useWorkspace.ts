@@ -5,6 +5,7 @@ import { useNotesContext } from '../../../hooks/useNotesContext'
 export const useWorkspace = () => {
   const [isEdit, setIsEdit] = useState(false)
   const { currentNoteId } = useNotesContext()
+
   //stop edit mode after changing note
   useEffect(() => {
     setIsEdit(false)

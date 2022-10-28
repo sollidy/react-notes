@@ -8,14 +8,13 @@ import { timeAgo } from '../../../../utils/timeAgo'
 import styles from './WorkspaceContent.module.scss'
 
 export const TitleEdit: FC = () => {
-  const { getCurrentNote } = useNotesContext()
-  const currentNote = getCurrentNote()
-  const { editNote } = useDb()
+  const { currentNote } = useNotesContext()
+  const { editNoteDb } = useDb()
 
   if (!currentNote) return null
 
   const editTitle = (title: string) => {
-    editNote(currentNote.id!, currentNote.text, title)
+    editNoteDb(currentNote.id!, currentNote.text, title)
   }
 
   return (

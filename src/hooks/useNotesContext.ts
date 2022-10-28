@@ -7,7 +7,7 @@ export const useNotesContext = () => {
     currentNoteId,
     allNotes,
     setCurrentNoteId,
-    getCurrentNote,
+    currentNote,
     setFirstNote,
     setSearch,
   } = useContext(NotesContext)
@@ -15,7 +15,7 @@ export const useNotesContext = () => {
     currentNoteId,
     allNotes,
     setCurrentNoteId,
-    getCurrentNote,
+    currentNote,
     setFirstNote,
     setSearch,
   }

@@ -12,7 +12,7 @@ export const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     currentNoteId,
     setCurrentNoteId,
     allNotes,
-    getCurrentNote,
+    currentNote,
     setFirstNote,
     setSearch,
   } = useDataForContext()
@@ -22,7 +22,7 @@ export const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         currentNoteId,
         setCurrentNoteId,
         allNotes,
-        getCurrentNote,
+        currentNote,
         setFirstNote,
         setSearch,
       }}

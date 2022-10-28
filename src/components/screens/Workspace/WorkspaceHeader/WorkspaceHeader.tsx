@@ -22,7 +22,7 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
   stopEdit,
 }) => {
   const { currentNoteId, setFirstNote, setSearch } = useNotesContext()
-  const { deleteNote } = useDb()
+  const { deleteNoteDb } = useDb()
 
   function showDeleteConfirm() {
     confirm({
@@ -33,7 +33,7 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
       cancelText: 'No',
       onOk() {
         if (currentNoteId) {
-          deleteNote(currentNoteId)
+          deleteNoteDb(currentNoteId)
           setFirstNote()
         }
       },
