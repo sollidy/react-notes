@@ -13,12 +13,12 @@ interface IWorkspaceContent {
 }
 
 export const WorkspaceContent: FC<IWorkspaceContent> = ({ isEdit }) => {
-  const { allNotes, currentNoteId } = useNotesContext()
+  const { currentNoteId } = useNotesContext()
 
   return (
     <Content className={styles.content}>
       <div className={styles.contentContainer}>
-        {!allNotes || !currentNoteId ? (
+        {!currentNoteId ? (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         ) : (
           <>

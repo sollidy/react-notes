@@ -1,54 +1,38 @@
-import { Button, Layout, Modal } from 'antd'
+import { Button, Layout } from 'antd'
 import Search from 'antd/lib/input/Search'
 import { FC } from 'react'
 
-import { useDb } from '../../../../hooks/useDb'
 import { useNotesContext } from '../../../../hooks/useNotesContext'
 
 import styles from './WorkspaceHeader.module.scss'
+import { useModalConfirm } from './useModalConfirm'
 
 const { Header } = Layout
-const { confirm } = Modal
 
 interface IWorkHeader {
-  startEdit: () => void
-  stopEdit: () => void
+  changeEditStatus: (status: 'view' | 'edit') => void
   isEdit: boolean
 }
 
 export const WorkspaceHeader: FC<IWorkHeader> = ({
   isEdit,
-  startEdit,
-  stopEdit,
+  changeEditStatus,
 }) => {
-  const { currentNoteId, setFirstNote, setSearch } = useNotesContext()
-  const { deleteNoteDb } = useDb()
-
-  function showDeleteConfirm() {
-    confirm({
-      title: 'Are you sure delete this note?',
-      content: 'It is unrevokable',
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        if (currentNoteId) {
-          deleteNoteDb(currentNoteId)
-          setFirstNote()
-        }
-      },
-    })
-  }
+  const { currentNoteId, setSearch } = useNotesContext()
+  const showDeleteConfirm = useModalConfirm()
 
   return (
     <Header className={styles.header}>
       <div className={styles.workspaceHeader}>
         <div className={styles.buttons}>
-          <Button onClick={startEdit} disabled={isEdit || !currentNoteId}>
+          <Button
+            onClick={() => changeEditStatus('edit')}
+            disabled={isEdit || !currentNoteId}
+          >
             Edit Note
           </Button>
           <Button
-            onClick={() => stopEdit()}
+            onClick={() => changeEditStatus('view')}
             disabled={!isEdit || !currentNoteId}
             type="primary"
           >

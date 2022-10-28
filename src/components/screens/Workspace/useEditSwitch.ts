@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useNotesContext } from '../../../hooks/useNotesContext'
 
-export const useWorkspace = () => {
+export const useEditSwitch = () => {
   const [isEdit, setIsEdit] = useState(false)
   const { currentNoteId } = useNotesContext()
 
@@ -11,16 +11,13 @@ export const useWorkspace = () => {
     setIsEdit(false)
   }, [currentNoteId])
 
-  const startEdit = () => {
-    setIsEdit(true)
-  }
-  const stopEdit = () => {
-    setIsEdit(false)
+  const changeEditStatus = (status: 'edit' | 'view') => {
+    if (status === 'edit') setIsEdit(true)
+    else setIsEdit(false)
   }
 
   return {
     isEdit,
-    startEdit,
-    stopEdit,
+    changeEditStatus,
   }
 }

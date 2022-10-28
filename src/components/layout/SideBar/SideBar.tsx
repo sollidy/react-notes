@@ -1,9 +1,7 @@
 import { Button, Menu } from 'antd'
 import { Layout } from 'antd'
-import { SelectInfo } from 'rc-menu/lib/interface'
 import { FC, useState } from 'react'
 
-import { useDb } from '../../../hooks/useDb'
 import { useNotesContext } from '../../../hooks/useNotesContext'
 
 import styles from './SideBar.module.scss'
@@ -13,18 +11,9 @@ const { Sider } = Layout
 
 export const SideBar: FC = () => {
   const [collapsed, setCollapsed] = useState(false)
-  const { createNoteDb } = useDb()
-  const menuItems = useSideBar()
-  const { setCurrentNoteId, currentNoteId, setSearch } = useNotesContext()
+  const { menuItems, createNewNote, selectMenuItem } = useSideBar()
+  const { currentNoteId } = useNotesContext()
 
-  const onMenuItemSelect = (selectMenu: SelectInfo) => {
-    setCurrentNoteId(Number(selectMenu.key))
-  }
-
-  const onCreateNote = () => {
-    createNoteDb()
-    setSearch('')
-  }
   const createButtonText = collapsed ? '+' : 'Create new Note'
   const selectedNote = currentNoteId ? currentNoteId.toString() : ''
 
@@ -37,14 +26,14 @@ export const SideBar: FC = () => {
       onCollapse={(value) => setCollapsed(value)}
     >
       <div className={styles.logo}>
-        <Button onClick={onCreateNote}>{createButtonText}</Button>
+        <Button onClick={createNewNote}>{createButtonText}</Button>
       </div>
       <Menu
         selectedKeys={[selectedNote]}
         theme="dark"
         mode="inline"
         items={menuItems}
-        onSelect={onMenuItemSelect}
+        onSelect={selectMenuItem}
       />
     </Sider>
   )
