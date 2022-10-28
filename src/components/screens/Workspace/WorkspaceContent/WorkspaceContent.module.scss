@@ -5,5 +5,14 @@
     background-color: white;
     padding: 24px;
     min-height: 100%;
+    > .divider {
+      margin-top: 0 !important;
+    }
   }
+}
+
+.titleEdit {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }

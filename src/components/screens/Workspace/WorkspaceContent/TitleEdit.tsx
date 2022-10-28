@@ -3,6 +3,9 @@ import { FC } from 'react'
 
 import { useDb } from '../../../../hooks/useDb'
 import { useNotesContext } from '../../../../hooks/useNotesContext'
+import { timeAgo } from '../../../../utils/timeAgo'
+
+import styles from './WorkspaceContent.module.scss'
 
 export const TitleEdit: FC = () => {
   const { getCurrentNote } = useNotesContext()
@@ -16,11 +19,14 @@ export const TitleEdit: FC = () => {
   }
 
   return (
-    <Typography.Title
-      editable={{ maxLength: 28, onChange: editTitle }}
-      level={1}
-    >
-      {currentNote.title}
-    </Typography.Title>
+    <div className={styles.titleEdit}>
+      <Typography.Title
+        editable={{ maxLength: 28, onChange: editTitle }}
+        level={2}
+      >
+        {currentNote.title}
+      </Typography.Title>
+      <div>{timeAgo(currentNote.createdAt)}</div>
+    </div>
   )
 }

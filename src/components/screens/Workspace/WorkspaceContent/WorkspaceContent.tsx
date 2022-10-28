@@ -23,7 +23,7 @@ export const WorkspaceContent: FC<IWorkspaceContent> = ({ isEdit }) => {
         ) : (
           <>
             <TitleEdit />
-            <Divider />
+            <Divider className={styles.divider} />
             <TextContainer isEdit={isEdit} />
           </>
         )}
