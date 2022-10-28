@@ -1,16 +1,28 @@
 .header {
   background: white !important;
   padding: 0 !important;
+  @media screen and (max-width: 600px) {
+    height: 120px !important;
+  }
 
   > .workspaceHeader {
     height: 100%;
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 600px) {
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+    }
 
     > .search {
       display: flex;
       align-items: center;
       margin-right: 48px;
+      @media screen and (max-width: 600px) {
+        margin: 0;
+      }
     }
 
     > .buttons {
@@ -19,6 +31,9 @@
       align-items: center;
       justify-content: flex-end;
       gap: 14px;
+      @media screen and (max-width: 600px) {
+        margin: 0;
+      }
     }
   }
 }

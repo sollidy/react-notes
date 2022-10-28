@@ -26,7 +26,7 @@ export const TitleEdit: FC = () => {
       >
         {currentNote.title}
       </Typography.Title>
-      <div>{timeAgo(currentNote.createdAt)}</div>
+      <div className={styles.timestamp}>{timeAgo(currentNote.createdAt)}</div>
     </div>
   )
 }

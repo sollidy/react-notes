@@ -30,6 +30,8 @@ export const SideBar: FC = () => {
 
   return (
     <Sider
+      collapsedWidth="60px"
+      breakpoint="md"
       collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
