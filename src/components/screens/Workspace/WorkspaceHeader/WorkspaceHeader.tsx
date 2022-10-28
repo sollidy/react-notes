@@ -1,3 +1,4 @@
+import { DeleteTwoTone, EditOutlined, SaveOutlined } from '@ant-design/icons'
 import { Button, Layout } from 'antd'
 import Search from 'antd/lib/input/Search'
 import { FC } from 'react'
@@ -26,26 +27,27 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
       <div className={styles.workspaceHeader}>
         <div className={styles.buttons}>
           <Button
+            title="Edit note"
+            icon={<EditOutlined />}
             onClick={() => changeEditStatus('edit')}
             disabled={isEdit || !currentNoteId}
           >
             Edit Note
           </Button>
           <Button
+            title="Save note"
+            type="primary"
+            icon={<SaveOutlined />}
             onClick={() => changeEditStatus('view')}
             disabled={!isEdit || !currentNoteId}
-            type="primary"
-          >
-            Save
-          </Button>
+          />
           <Button
-            type="primary"
-            onClick={showDeleteConfirm}
+            title="Delete note"
+            icon={<DeleteTwoTone twoToneColor={'red'} />}
             danger
+            onClick={showDeleteConfirm}
             disabled={!currentNoteId}
-          >
-            Delete
-          </Button>
+          />
         </div>
         <div className={styles.search}>
           <Search

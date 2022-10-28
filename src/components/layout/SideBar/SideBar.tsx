@@ -26,7 +26,9 @@ export const SideBar: FC = () => {
       onCollapse={(value) => setCollapsed(value)}
     >
       <div className={styles.logo}>
-        <Button onClick={createNewNote}>{createButtonText}</Button>
+        <Button ghost onClick={createNewNote}>
+          {createButtonText}
+        </Button>
       </div>
       <Menu
         selectedKeys={[selectedNote]}
