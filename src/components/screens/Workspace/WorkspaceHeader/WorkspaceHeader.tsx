@@ -52,6 +52,7 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
         <div className={styles.search}>
           <Search
             allowClear
+            disabled={isEdit}
             placeholder="search notes"
             onSearch={setSearch}
             enterButton

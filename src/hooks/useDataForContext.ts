@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useDb } from './useDb'
 
@@ -7,37 +7,34 @@ export const useDataForContext = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const { getAllNotesDb } = useDb()
 
-  useEffect(() => {
-    if (!getAllNotesDb || getAllNotesDb.length < 1) {
-      setCurrentId(undefined)
-    } else {
-      setCurrentId(getAllNotesDb[0].id)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getAllNotesDb?.length])
-
-  const setCurrentNoteId = (id: number | undefined) => {
+  const setCurrentNoteId = useCallback((id: number | undefined) => {
     setCurrentId(id)
-  }
+  }, [])
 
-  const setSearch = (term: string) => {
+  const setSearch = useCallback((term: string) => {
     setSearchTerm(term)
-  }
+  }, [])
 
   const currentNote = getAllNotesDb?.find((note) => note.id === currentId)
 
   const allNotes = useMemo(() => {
+    if (!getAllNotesDb?.length) return
     if (!searchTerm) return getAllNotesDb
-    const filteredNotes = getAllNotesDb?.filter((note) =>
+    const filteredNotes = getAllNotesDb.filter((note) =>
       note.text.includes(searchTerm)
     )
-    if (!filteredNotes || filteredNotes.length < 1) {
-      setCurrentId(undefined)
-      return
-    }
-    setCurrentId(filteredNotes[0].id)
+    if (!filteredNotes.length) return
     return filteredNotes
   }, [getAllNotesDb, searchTerm])
+
+  useEffect(() => {
+    if (!allNotes?.length) {
+      setCurrentId(undefined)
+    } else {
+      if (currentId === undefined || !!searchTerm) setCurrentId(allNotes[0].id)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allNotes?.length, searchTerm])
 
   return {
     currentNoteId: currentId,
