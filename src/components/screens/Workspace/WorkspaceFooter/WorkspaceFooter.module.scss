@@ -1,0 +1,14 @@
+.workspaceFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  color: rgb(146, 146, 146);
+  font-size: small;
+
+  > a {
+    margin-left: 8px;
+    text-decoration: none;
+    color: rgb(120, 120, 120);
+  }
+}
