@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { useNotesContext } from '../../../hooks/useNotesContext'
 
@@ -11,10 +11,10 @@ export const useEditSwitch = () => {
     setIsEdit(false)
   }, [currentNoteId])
 
-  const changeEditStatus = (status: 'edit' | 'view') => {
+  const changeEditStatus = useCallback((status: 'edit' | 'view') => {
     if (status === 'edit') setIsEdit(true)
     else setIsEdit(false)
-  }
+  }, [])
 
   return {
     isEdit,
