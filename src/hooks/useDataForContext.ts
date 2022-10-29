@@ -1,35 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { useDb } from './useDb'
 
 export const useDataForContext = () => {
   const [currentId, setCurrentId] = useState<number | undefined>(undefined)
-  const [isLoadedNotes, setIsLoadedNotes] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const { getAllNotesDb } = useDb()
 
-  // For first loading to set active note
   useEffect(() => {
-    if (isLoadedNotes) setFirstNote()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoadedNotes])
-
-  // After delete last note to set id to undefined
-  useEffect(() => {
-    if (!getAllNotesDb || getAllNotesDb.length <= 0) {
+    if (!getAllNotesDb || getAllNotesDb.length < 1) {
       setCurrentId(undefined)
-      setIsLoadedNotes(false)
-    } else setIsLoadedNotes(true)
-  }, [getAllNotesDb])
-
-  //Only for deletion, to set new active note
-  const setFirstNote = () => {
-    if (getAllNotesDb && getAllNotesDb.length > 0)
+    } else {
       setCurrentId(getAllNotesDb[0].id)
-    else setCurrentId(undefined)
-  }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getAllNotesDb?.length])
 
-  const setCurrentNoteId = (id: number) => {
+  const setCurrentNoteId = (id: number | undefined) => {
     setCurrentId(id)
   }
 
@@ -39,16 +26,24 @@ export const useDataForContext = () => {
 
   const currentNote = getAllNotesDb?.find((note) => note.id === currentId)
 
-  const allNotes = searchTerm
-    ? getAllNotesDb?.filter((note) => note.text.includes(searchTerm))
-    : getAllNotesDb
+  const allNotes = useMemo(() => {
+    if (!searchTerm) return getAllNotesDb
+    const filteredNotes = getAllNotesDb?.filter((note) =>
+      note.text.includes(searchTerm)
+    )
+    if (!filteredNotes || filteredNotes.length < 1) {
+      setCurrentId(undefined)
+      return
+    }
+    setCurrentId(filteredNotes[0].id)
+    return filteredNotes
+  }, [getAllNotesDb, searchTerm])
 
   return {
     currentNoteId: currentId,
     allNotes,
     currentNote,
     setCurrentNoteId,
-    setFirstNote,
     setSearch,
   }
 }

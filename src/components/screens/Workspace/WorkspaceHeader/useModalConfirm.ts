@@ -7,7 +7,7 @@ const { confirm } = Modal
 
 export const useModalConfirm = () => {
   const { deleteNoteDb } = useDb()
-  const { currentNoteId, setFirstNote } = useNotesContext()
+  const { currentNoteId } = useNotesContext()
 
   const showDeleteConfirm = () => {
     confirm({
@@ -19,7 +19,6 @@ export const useModalConfirm = () => {
       onOk() {
         if (currentNoteId) {
           deleteNoteDb(currentNoteId)
-          setFirstNote()
         }
       },
     })

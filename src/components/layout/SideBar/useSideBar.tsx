@@ -16,6 +16,7 @@ export const useSideBar = () => {
 
   const createNewNote = () => {
     createNoteDb()
+    setCurrentNoteId(undefined) //to avoid blinking menu select bg
     setSearch('')
   }
 
