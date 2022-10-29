@@ -19,7 +19,10 @@ export const WorkspaceContent: FC<IWorkspaceContent> = ({ isEdit }) => {
     <Content className={styles.content}>
       <div className={styles.contentContainer}>
         {!currentNoteId ? (
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          <Empty
+            className={styles.empty}
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+          />
         ) : (
           <>
             <TitleEdit />
