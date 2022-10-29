@@ -7,14 +7,6 @@ export const useDataForContext = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const { getAllNotesDb } = useDb()
 
-  const setCurrentNoteId = useCallback((id: number | undefined) => {
-    setCurrentId(id)
-  }, [])
-
-  const setSearch = useCallback((term: string) => {
-    setSearchTerm(term)
-  }, [])
-
   const allNotes = useMemo(() => {
     if (!getAllNotesDb?.length) return
     if (!searchTerm) return getAllNotesDb
@@ -33,6 +25,14 @@ export const useDataForContext = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allNotes?.length, searchTerm])
+
+  const setCurrentNoteId = useCallback((id: number | undefined) => {
+    setCurrentId(id)
+  }, [])
+
+  const setSearch = useCallback((term: string) => {
+    setSearchTerm(term)
+  }, [])
 
   return {
     currentNoteId: currentId,
