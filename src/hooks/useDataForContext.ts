@@ -15,8 +15,6 @@ export const useDataForContext = () => {
     setSearchTerm(term)
   }, [])
 
-  const currentNote = getAllNotesDb?.find((note) => note.id === currentId)
-
   const allNotes = useMemo(() => {
     if (!getAllNotesDb?.length) return
     if (!searchTerm) return getAllNotesDb
@@ -39,7 +37,6 @@ export const useDataForContext = () => {
   return {
     currentNoteId: currentId,
     allNotes,
-    currentNote,
     setCurrentNoteId,
     setSearch,
   }

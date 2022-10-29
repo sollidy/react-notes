@@ -1,14 +1,14 @@
 import { Typography } from 'antd'
 import { FC } from 'react'
 
+import { useCurrentNote } from '../../../../hooks/useCurrentNote'
 import { useDb } from '../../../../hooks/useDb'
-import { useNotesContext } from '../../../../hooks/useNotesContext'
 import { timeAgo } from '../../../../utils/timeAgo'
 
 import styles from './WorkspaceContent.module.scss'
 
 export const TitleEdit: FC = () => {
-  const { currentNote } = useNotesContext()
+  const currentNote = useCurrentNote()
   const { editNoteDb } = useDb()
 
   if (!currentNote) return null
