@@ -1,4 +1,4 @@
-import { Divider, Empty, Layout } from 'antd'
+import { Empty, Layout } from 'antd'
 import { FC } from 'react'
 
 import { useNotesContext } from '../../../../hooks/useNotesContext'
@@ -26,7 +26,6 @@ export const WorkspaceContent: FC<IWorkspaceContent> = ({ isEdit }) => {
         ) : (
           <>
             <TitleEdit />
-            <Divider className={styles.divider} />
             <TextContainer isEdit={isEdit} />
           </>
         )}

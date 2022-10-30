@@ -1,4 +1,4 @@
-import { Typography } from 'antd'
+import { Divider, Typography } from 'antd'
 import { FC } from 'react'
 
 import { useCurrentNote } from '../../../../hooks/useCurrentNote'
@@ -18,14 +18,17 @@ export const TitleEdit: FC = () => {
   }
 
   return (
-    <div className={styles.titleEdit}>
-      <Typography.Title
-        editable={{ maxLength: 28, onChange: editTitle }}
-        level={2}
-      >
-        {currentNote.title}
-      </Typography.Title>
-      <div className={styles.timestamp}>{timeAgo(currentNote.createdAt)}</div>
-    </div>
+    <>
+      <div className={styles.titleEdit}>
+        <Typography.Title
+          editable={{ maxLength: 28, onChange: editTitle }}
+          level={2}
+        >
+          {currentNote.title}
+        </Typography.Title>
+        <div className={styles.timestamp}>{timeAgo(currentNote.createdAt)}</div>
+      </div>
+      <Divider style={{ marginTop: '5px' }} />
+    </>
   )
 }
