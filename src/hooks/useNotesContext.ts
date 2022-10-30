@@ -3,11 +3,11 @@ import { useContext } from 'react'
 import { NotesContext } from '../providers/ContextProvider'
 
 export const useNotesContext = () => {
-  const { currentNoteId, allNotes, setCurrentNoteId, setSearch } =
+  const { currentNoteId, allNotesOld, setCurrentNoteId, setSearch } =
     useContext(NotesContext)
   return {
     currentNoteId,
-    allNotes,
+    allNotesOld,
     setCurrentNoteId,
     setSearch,
   }

@@ -1,7 +1,7 @@
 import { Empty, Layout } from 'antd'
 import { FC } from 'react'
 
-import { useNotesContext } from '../../../../hooks/useNotesContext'
+import { useNoteIdState } from '../../../../context/noteId-context'
 
 import { TextContainer } from './TextContainer/TextContainer'
 import { TitleEdit } from './TitleEdit'
@@ -13,7 +13,7 @@ interface IWorkspaceContent {
 }
 
 export const WorkspaceContent: FC<IWorkspaceContent> = ({ isEdit }) => {
-  const { currentNoteId } = useNotesContext()
+  const { currentNoteId } = useNoteIdState()
 
   return (
     <Content className={styles.content}>
