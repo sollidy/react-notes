@@ -9,12 +9,11 @@ export const useDb = () => {
     text: string = '',
     title: string = 'New note'
   ) => {
-    const id = await db.notes.add({
+    return await db.notes.add({
       text,
       title,
       createdAt: new Date(Date.now()),
     })
-    return +id
   }
 
   const editNoteDb = (id: number, text: string, title?: string) => {
@@ -27,11 +26,16 @@ export const useDb = () => {
     db.notes.delete(id)
   }
 
+  const getCurrentNoteDb = async (id: number) => {
+    return await db.notes.get(id)
+  }
+
   const getAllNotesDb = useLiveQuery(
     async () => await db.notes.reverse().toArray()
   )
 
   return {
+    getCurrentNoteDb,
     getAllNotesDb,
     createNoteDb,
     editNoteDb,

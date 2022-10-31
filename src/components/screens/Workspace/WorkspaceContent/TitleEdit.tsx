@@ -1,15 +1,15 @@
 import { Divider, Typography } from 'antd'
 import { FC } from 'react'
 
-import { useNotesState } from '../../../../context/notes-context'
+import { useCurrentNote } from '../../../../hooks/useCurrentNote'
 import { useDb } from '../../../../hooks/useDb'
 import { timeAgo } from '../../../../utils/timeAgo'
 
 import styles from './WorkspaceContent.module.scss'
 
 export const TitleEdit: FC = () => {
-  const { currentNote } = useNotesState()
   const { editNoteDb } = useDb()
+  const currentNote = useCurrentNote()
 
   if (!currentNote) return null
 

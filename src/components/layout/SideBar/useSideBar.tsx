@@ -17,7 +17,7 @@ export const useSideBar = () => {
 
   const createNewNote = async () => {
     const newNoteIndex = await createNoteDb()
-    dispatch({ type: 'updateNoteId', payload: Number(newNoteIndex) })
+    dispatch({ type: 'updateNoteId', payload: +newNoteIndex })
     dispatch({ type: 'updateSearchTerm', payload: '' })
   }
 
