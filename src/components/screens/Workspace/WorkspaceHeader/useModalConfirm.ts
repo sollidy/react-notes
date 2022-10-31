@@ -25,7 +25,6 @@ export const useModalConfirm = () => {
       onOk() {
         if (currentNoteId) {
           deleteNoteDb(currentNoteId)
-
           dispatch({ type: 'updateNoteId', payload: undefined })
         }
       },
