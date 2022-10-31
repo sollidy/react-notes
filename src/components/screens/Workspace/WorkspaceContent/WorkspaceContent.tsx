@@ -2,6 +2,7 @@ import { Empty, Layout } from 'antd'
 import { FC } from 'react'
 
 import { useNoteIdState } from '../../../../context/noteId-context'
+import { useDebounce } from '../../../../hooks/useDebounce'
 
 import { TextContainer } from './TextContainer/TextContainer'
 import { TitleEdit } from './TitleEdit'
@@ -13,7 +14,8 @@ interface IWorkspaceContent {
 }
 
 export const WorkspaceContent: FC<IWorkspaceContent> = ({ isEdit }) => {
-  const { currentNoteId } = useNoteIdState()
+  const { currentNoteId: cur } = useNoteIdState()
+  const currentNoteId = useDebounce(cur)
 
   return (
     <Content className={styles.content}>
