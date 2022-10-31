@@ -13,8 +13,8 @@ export const TitleEdit: FC = () => {
 
   if (!currentNote) return null
 
-  const handleTitleEdit = (title: string) => {
-    editNoteDb(currentNote.id!, currentNote.text, title)
+  const handleTitleEdit = async (title: string) => {
+    await editNoteDb(currentNote.id!, { title })
   }
 
   return (

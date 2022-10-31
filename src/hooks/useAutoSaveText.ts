@@ -10,7 +10,7 @@ export const useAutoSaveText = (value: string) => {
 
   useEffect(() => {
     if (currentNoteId && value) {
-      editNoteDb(currentNoteId, value)
+      editNoteDb(currentNoteId, { text: value })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])

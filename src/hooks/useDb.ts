@@ -16,10 +16,16 @@ export const useDb = () => {
     })
   }
 
-  const editNoteDb = (id: number, text: string, title?: string) => {
-    db.notes.where({ id: id }).modify((n: Notes) => (n.text = text))
-    if (!title) return
-    db.notes.where({ id: id }).modify((n: Notes) => (n.title = title))
+  const editNoteDb = async (
+    id: number,
+    { text, title }: { text?: string; title?: string }
+  ) => {
+    if (text) {
+      await db.notes.where({ id: id }).modify((n: Notes) => (n.text = text))
+    }
+    if (title) {
+      await db.notes.where({ id: id }).modify((n: Notes) => (n.title = title))
+    }
   }
 
   const deleteNoteDb = (id: number) => {
