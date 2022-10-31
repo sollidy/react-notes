@@ -9,11 +9,11 @@ import { useCurrentNote } from '../../../../../hooks/useCurrentNote'
 export const TextEdit: FC = () => {
   const [value, setValue] = useState('')
   const currentNote = useCurrentNote()
+  console.log(currentNote)
 
   useEffect(() => {
     if (currentNote) setValue(currentNote.text)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [currentNote])
 
   useAutoSaveText(value)
 
