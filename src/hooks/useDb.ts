@@ -28,8 +28,8 @@ export const useDb = () => {
     }
   }
 
-  const deleteNoteDb = (id: number) => {
-    db.notes.delete(id)
+  const deleteNoteDb = async (id: number) => {
+    await db.notes.delete(id)
   }
 
   const getCurrentNoteDb = async (id: number) => {
