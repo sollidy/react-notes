@@ -4,10 +4,12 @@ import { useNotesState } from '../context/notes-context'
 import { Notes } from '../db/notes'
 
 import { useDb } from './useDb'
+import { useNotes } from './useNotes'
 
 export const useCurrentNote = () => {
   const { getCurrentNoteDb } = useDb()
-  const { currentNoteId, allNotes } = useNotesState()
+  const { currentNoteId } = useNotesState()
+  const notes = useNotes()
 
   const [currentNote, setCurrentNote] = useState<Notes | undefined>(undefined)
 
@@ -19,8 +21,7 @@ export const useCurrentNote = () => {
       }
     }
     getCurrentNote()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentNoteId, allNotes])
+  }, [currentNoteId, notes, getCurrentNoteDb])
 
   return currentNote
 }

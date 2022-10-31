@@ -3,25 +3,27 @@ import { FC, useCallback, useEffect, useState } from 'react'
 import { SimpleMdeReact } from 'react-simplemde-editor'
 
 import { customRendererOptions } from '../../../../../config/simplemde.config'
-import { useNotesState } from '../../../../../context/notes-context'
+import { Notes } from '../../../../../db/notes'
 import { useAutoSaveText } from '../../../../../hooks/useAutoSaveText'
 
-export const TextEdit: FC = () => {
+interface ITextEdit {
+  currentNote: Notes
+}
+
+export const TextEdit: FC<ITextEdit> = ({ currentNote }) => {
   const [value, setValue] = useState('')
-  const { currentNote } = useNotesState()
 
   useEffect(() => {
-    if (currentNote) setValue(currentNote.text)
+    setValue(currentNote.text)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  //TODO saving text debounce
   useAutoSaveText(value)
 
   const onChange = useCallback((value: string) => {
     setValue(value)
   }, [])
-
-  if (!currentNote) return null
 
   return (
     <SimpleMdeReact

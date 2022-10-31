@@ -1,4 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks'
+import { useCallback } from 'react'
 
 import { db } from '../db'
 import { Notes } from '../db/notes'
@@ -32,15 +33,18 @@ export const useDb = () => {
     await db.notes.delete(id)
   }
 
-  const getCurrentNoteDb = async (id: number) => {
+  const getCurrentNoteDb = useCallback(async (id: number) => {
     return await db.notes.get(id)
-  }
+  }, [])
+
+  const getNotesDb = useLiveQuery(() => db.notes.reverse().toArray())
 
   const getAllNotesDb = useLiveQuery(
     async () => await db.notes.reverse().toArray()
   )
 
   return {
+    getNotesDb,
     getCurrentNoteDb,
     getAllNotesDb,
     createNoteDb,
