@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 
-import { useNoteIdState } from '../context/noteId-context'
+import { useNotesState } from '../context/notes-context'
 
 import { useDb } from './useDb'
 
 export const useAutoSaveText = (value: string) => {
-  const { currentNoteId } = useNoteIdState()
+  const { currentNoteId } = useNotesState()
   const { editNoteDb } = useDb()
 
   useEffect(() => {

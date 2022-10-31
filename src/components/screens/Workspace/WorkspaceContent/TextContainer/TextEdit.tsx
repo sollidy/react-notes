@@ -13,7 +13,8 @@ export const TextEdit: FC = () => {
 
   useEffect(() => {
     if (currentNote) setValue(currentNote.text)
-  }, [currentNote])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useAutoSaveText(value)
 

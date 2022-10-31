@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import { useNoteIdState } from '../../../context/noteId-context'
+import { useNotesState } from '../../../context/notes-context'
 
 export const useEditSwitch = () => {
   const [isEdit, setIsEdit] = useState(false)
 
-  const { currentNoteId } = useNoteIdState()
+  const { currentNoteId } = useNotesState()
 
   //stop edit mode after changing note
   useEffect(() => {

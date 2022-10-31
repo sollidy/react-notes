@@ -14,7 +14,7 @@ type Action =
   | { type: 'updateNoteId'; payload: number | undefined }
 type Dispatch = (action: Action) => void
 type State = { currentNoteId: number | undefined; searchTerm: string }
-type NoteIdProviderProps = { children: React.ReactNode }
+type NotesProviderProps = { children: React.ReactNode }
 type NotesState = State & { allNotes: Notes[] | undefined }
 
 const NotesStateContext = createContext<NotesState | undefined>(undefined)
@@ -40,7 +40,7 @@ function notesReducer(state: State, action: Action) {
   }
 }
 
-function NoteIdProvider({ children }: NoteIdProviderProps) {
+function NotesProvider({ children }: NotesProviderProps) {
   const { allNotes, currentNoteId, searchTerm, dispatch } = useNotesData()
   return (
     <NotesStateContext.Provider value={{ currentNoteId, searchTerm, allNotes }}>
@@ -81,7 +81,7 @@ function useNotesData() {
 function useNotesState() {
   const context = useContext(NotesStateContext)
   if (context === undefined) {
-    throw new Error('useNoteIdState must be used within a NoteIdStateContext')
+    throw new Error('useNotesState must be used within a NotesStateContext')
   }
   return context
 }
@@ -90,10 +90,10 @@ function useNotesDispatch() {
   const context = useContext(NotesDispatchContext)
   if (context === undefined) {
     throw new Error(
-      'useNoteIdDispatch must be used within a NoteIdDispatchContext'
+      'useNotesDispatch must be used within a NotesDispatchContext'
     )
   }
   return context
 }
 
-export { NoteIdProvider, useNotesState, useNotesDispatch }
+export { NotesProvider, useNotesState, useNotesDispatch }

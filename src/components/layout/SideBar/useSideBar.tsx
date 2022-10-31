@@ -1,16 +1,14 @@
 import { FileTextOutlined } from '@ant-design/icons'
 import { SelectInfo } from 'rc-menu/lib/interface'
 
-import { useNoteIdDispatch } from '../../../context/noteId-context'
-import { useSearchDispatch } from '../../../context/search-context'
+import { useNotesDispatch, useNotesState } from '../../../context/notes-context'
 import { useDb } from '../../../hooks/useDb'
-import { useNotes } from '../../../hooks/useNotes'
 
 export const useSideBar = () => {
-  const setNoteId = useNoteIdDispatch()
-  const allNotes = useNotes()
   const { createNoteDb } = useDb()
-  const setSearch = useSearchDispatch()
+  const { allNotes } = useNotesState()
+  const dispatch = useNotesDispatch()
+  console.log(allNotes)
 
   const menuItems = allNotes?.map((note) => ({
     label: note.title,
@@ -20,12 +18,12 @@ export const useSideBar = () => {
 
   const createNewNote = () => {
     createNoteDb()
-    setNoteId({ type: 'reset' })
-    setSearch({ type: 'reset' })
+    dispatch({ type: 'updateNoteId', payload: undefined })
+    dispatch({ type: 'updateSearchTerm', payload: '' })
   }
 
   const selectMenuItem = (selectMenu: SelectInfo) => {
-    setNoteId({ type: 'update', payload: +selectMenu.key })
+    dispatch({ type: 'updateNoteId', payload: +selectMenu.key })
   }
 
   return { createNewNote, menuItems, selectMenuItem }

@@ -2,9 +2,9 @@ import { Modal } from 'antd'
 import { useCallback, useMemo } from 'react'
 
 import {
-  useNoteIdDispatch,
-  useNoteIdState,
-} from '../../../../context/noteId-context'
+  useNotesDispatch,
+  useNotesState,
+} from '../../../../context/notes-context'
 import { useDb } from '../../../../hooks/useDb'
 
 const { confirm } = Modal
@@ -12,8 +12,8 @@ const { confirm } = Modal
 export const useModalConfirm = () => {
   const { deleteNoteDb } = useDb()
 
-  const { currentNoteId } = useNoteIdState()
-  const setNoteId = useNoteIdDispatch()
+  const { currentNoteId } = useNotesState()
+  const dispatch = useNotesDispatch()
 
   const showDeleteConfirm = useCallback(() => {
     confirm({
@@ -25,11 +25,12 @@ export const useModalConfirm = () => {
       onOk() {
         if (currentNoteId) {
           deleteNoteDb(currentNoteId)
-          setNoteId({ type: 'reset' })
+
+          dispatch({ type: 'updateNoteId', payload: undefined })
         }
       },
     })
-  }, [currentNoteId, deleteNoteDb, setNoteId])
+  }, [currentNoteId, deleteNoteDb, dispatch])
 
   return showDeleteConfirm
 }
