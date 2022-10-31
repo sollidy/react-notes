@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { useCurrentNote } from '../../../../../hooks/useCurrentNote'
+import { useNotesState } from '../../../../../context/notes-context'
 
 import { TextEdit } from './TextEdit'
 import { TextView } from './TextView'
@@ -10,7 +10,7 @@ interface ITextContainer {
 }
 
 export const TextContainer: FC<ITextContainer> = ({ isEdit }) => {
-  const currentNote = useCurrentNote()
+  const { currentNote } = useNotesState()
 
   if (!currentNote) return null
 

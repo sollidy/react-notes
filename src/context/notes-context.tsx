@@ -15,7 +15,10 @@ type Action =
 type Dispatch = (action: Action) => void
 type State = { currentNoteId: number | undefined; searchTerm: string }
 type NotesProviderProps = { children: React.ReactNode }
-type NotesState = State & { allNotes: Notes[] | undefined }
+type NotesState = State & {
+  allNotes: Notes[] | undefined
+  currentNote: Notes | undefined
+}
 
 const NotesStateContext = createContext<NotesState | undefined>(undefined)
 const NotesDispatchContext = createContext<Dispatch | undefined>(undefined)
@@ -41,9 +44,12 @@ function notesReducer(state: State, action: Action) {
 }
 
 function NotesProvider({ children }: NotesProviderProps) {
-  const { allNotes, currentNoteId, searchTerm, dispatch } = useNotesData()
+  const { allNotes, currentNoteId, currentNote, searchTerm, dispatch } =
+    useNotesData()
   return (
-    <NotesStateContext.Provider value={{ currentNoteId, searchTerm, allNotes }}>
+    <NotesStateContext.Provider
+      value={{ currentNoteId, searchTerm, allNotes, currentNote }}
+    >
       <NotesDispatchContext.Provider value={dispatch}>
         {children}
       </NotesDispatchContext.Provider>
@@ -68,6 +74,11 @@ function useNotesData() {
     return filteredNotes
   }, [getAllNotesDb, searchTerm])
 
+  const currentNote = useMemo(
+    () => allNotes?.find((note) => note.id === currentNoteId),
+    [allNotes, currentNoteId]
+  )
+
   useEffect(() => {
     if (!allNotes?.length) return
     if (currentNoteId === undefined || !!searchTerm)
@@ -75,7 +86,7 @@ function useNotesData() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allNotes])
 
-  return { allNotes, currentNoteId, searchTerm, dispatch }
+  return { allNotes, currentNote, currentNoteId, searchTerm, dispatch }
 }
 
 function useNotesState() {

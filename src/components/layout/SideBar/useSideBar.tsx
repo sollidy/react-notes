@@ -8,7 +8,6 @@ export const useSideBar = () => {
   const { createNoteDb } = useDb()
   const { allNotes } = useNotesState()
   const dispatch = useNotesDispatch()
-  console.log(allNotes)
 
   const menuItems = allNotes?.map((note) => ({
     label: note.title,
@@ -16,9 +15,9 @@ export const useSideBar = () => {
     icon: <FileTextOutlined />,
   }))
 
-  const createNewNote = () => {
-    createNoteDb()
-    dispatch({ type: 'updateNoteId', payload: undefined })
+  const createNewNote = async () => {
+    const newNoteIndex = await createNoteDb()
+    dispatch({ type: 'updateNoteId', payload: Number(newNoteIndex) })
     dispatch({ type: 'updateSearchTerm', payload: '' })
   }
 

@@ -5,8 +5,16 @@ import { Notes } from '../db/notes'
 
 export const useDb = () => {
   //work with indexDb
-  const createNoteDb = (text: string = '', title: string = 'New note') => {
-    db.notes.add({ text, title, createdAt: new Date(Date.now()) })
+  const createNoteDb = async (
+    text: string = '',
+    title: string = 'New note'
+  ) => {
+    const id = await db.notes.add({
+      text,
+      title,
+      createdAt: new Date(Date.now()),
+    })
+    return +id
   }
 
   const editNoteDb = (id: number, text: string, title?: string) => {

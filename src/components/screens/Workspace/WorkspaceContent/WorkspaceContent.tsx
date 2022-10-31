@@ -1,8 +1,7 @@
 import { Empty, Layout } from 'antd'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { useNotesState } from '../../../../context/notes-context'
-import { useDebounce } from '../../../../hooks/useDebounce'
 
 import { TextContainer } from './TextContainer/TextContainer'
 import { TitleEdit } from './TitleEdit'
@@ -14,13 +13,20 @@ interface IWorkspaceContent {
 }
 
 export const WorkspaceContent: FC<IWorkspaceContent> = ({ isEdit }) => {
-  const { currentNoteId: cur } = useNotesState()
-  const currentNoteId = useDebounce(cur)
+  const { allNotes } = useNotesState()
+
+  //stop blinking Empty content on first loading
+  const [isFirstLoading, setIsFirstLoading] = useState(true)
+  useEffect(() => {
+    setTimeout(() => {
+      setIsFirstLoading(false)
+    }, 120)
+  }, [])
 
   return (
     <Content className={styles.content}>
       <div className={styles.contentContainer}>
-        {!currentNoteId ? (
+        {!allNotes && !isFirstLoading ? (
           <Empty
             className={styles.empty}
             image={Empty.PRESENTED_IMAGE_SIMPLE}

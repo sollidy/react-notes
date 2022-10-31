@@ -3,13 +3,12 @@ import { FC, useCallback, useEffect, useState } from 'react'
 import { SimpleMdeReact } from 'react-simplemde-editor'
 
 import { customRendererOptions } from '../../../../../config/simplemde.config'
+import { useNotesState } from '../../../../../context/notes-context'
 import { useAutoSaveText } from '../../../../../hooks/useAutoSaveText'
-import { useCurrentNote } from '../../../../../hooks/useCurrentNote'
 
 export const TextEdit: FC = () => {
   const [value, setValue] = useState('')
-  const currentNote = useCurrentNote()
-  console.log(currentNote)
+  const { currentNote } = useNotesState()
 
   useEffect(() => {
     if (currentNote) setValue(currentNote.text)
