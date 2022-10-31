@@ -4,7 +4,6 @@ import Search from 'antd/lib/input/Search'
 import { FC } from 'react'
 
 import { useNoteIdState } from '../../../../context/noteId-context'
-import { useNotesContext } from '../../../../hooks/useNotesContext'
 
 import styles from './WorkspaceHeader.module.scss'
 import { useModalConfirm } from './useModalConfirm'
@@ -20,8 +19,6 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
   isEdit,
   changeEditStatus,
 }) => {
-  const { setSearch } = useNotesContext()
-
   const { currentNoteId } = useNoteIdState()
   const showDeleteConfirm = useModalConfirm()
 
@@ -57,7 +54,7 @@ export const WorkspaceHeader: FC<IWorkHeader> = ({
             allowClear
             disabled={isEdit}
             placeholder="search notes"
-            onSearch={setSearch}
+            // onSearch={setSearch}
             enterButton
           />
         </div>

@@ -4,10 +4,8 @@ import { SelectInfo } from 'rc-menu/lib/interface'
 import { useNoteIdDispatch } from '../../../context/noteId-context'
 import { useDb } from '../../../hooks/useDb'
 import { useNotes } from '../../../hooks/useNotes'
-import { useNotesContext } from '../../../hooks/useNotesContext'
 
 export const useSideBar = () => {
-  const { setSearch } = useNotesContext()
   const setNoteId = useNoteIdDispatch()
   const allNotes = useNotes()
   const { createNoteDb } = useDb()
@@ -21,7 +19,7 @@ export const useSideBar = () => {
   const createNewNote = () => {
     createNoteDb()
     setNoteId({ type: 'reset' })
-    setSearch('')
+    // setSearch('')
   }
 
   const selectMenuItem = (selectMenu: SelectInfo) => {
