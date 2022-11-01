@@ -11,8 +11,15 @@ interface ITextContainer {
 
 export const TextContainer: FC<ITextContainer> = ({ isEdit }) => {
   const currentNote = useCurrentNote()
-
   if (!currentNote) return null
 
-  return <>{isEdit ? <TextEdit /> : <TextView md={currentNote.text} />}</>
+  return (
+    <>
+      {isEdit ? (
+        <TextEdit currentNote={currentNote} />
+      ) : (
+        <TextView md={currentNote.text} />
+      )}
+    </>
+  )
 }

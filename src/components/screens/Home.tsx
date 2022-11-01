@@ -1,12 +1,12 @@
 import { FC } from 'react'
 
-import { ContextProvider } from '../../providers/ContextProvider'
+import { NotesProvider } from '../../context/notes-context'
 import { MainLayout } from '../layout/MainLayout'
 
 export const Home: FC = () => {
   return (
-    <ContextProvider>
+    <NotesProvider>
       <MainLayout />
-    </ContextProvider>
+    </NotesProvider>
   )
 }
