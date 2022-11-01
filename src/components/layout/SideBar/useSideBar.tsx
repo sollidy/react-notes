@@ -1,15 +1,16 @@
 import { FileTextOutlined } from '@ant-design/icons'
 import { SelectInfo } from 'rc-menu/lib/interface'
 
-import { useNotesDispatch, useNotesState } from '../../../context/notes-context'
+import { useNotesDispatch } from '../../../context/notes-context'
 import { useDb } from '../../../hooks/useDb'
+import { useNotes } from '../../../hooks/useNotes'
 
 export const useSideBar = () => {
   const { createNoteDb } = useDb()
-  const { allNotes } = useNotesState()
+  const notes = useNotes()
   const dispatch = useNotesDispatch()
 
-  const menuItems = allNotes?.map((note) => ({
+  const menuItems = notes?.map((note) => ({
     label: note.title,
     key: note.id!.toString(),
     icon: <FileTextOutlined />,

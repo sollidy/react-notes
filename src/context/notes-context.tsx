@@ -1,13 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useReducer,
-} from 'react'
-
-import { Notes } from '../db/notes'
-import { useDb } from '../hooks/useDb'
+import { createContext, useContext, useReducer } from 'react'
 
 type Action =
   | { type: 'updateSearchTerm'; payload: string }
@@ -15,12 +6,8 @@ type Action =
 type Dispatch = (action: Action) => void
 type State = { currentNoteId: number | undefined; searchTerm: string }
 type NotesProviderProps = { children: React.ReactNode }
-type NotesState = State & {
-  allNotes: Notes[] | undefined
-  currentNote: Notes | undefined
-}
 
-const NotesStateContext = createContext<NotesState | undefined>(undefined)
+const NotesStateContext = createContext<State | undefined>(undefined)
 const NotesDispatchContext = createContext<Dispatch | undefined>(undefined)
 
 function notesReducer(state: State, action: Action) {
@@ -44,49 +31,17 @@ function notesReducer(state: State, action: Action) {
 }
 
 function NotesProvider({ children }: NotesProviderProps) {
-  const { allNotes, currentNoteId, currentNote, searchTerm, dispatch } =
-    useNotesData()
+  const [{ currentNoteId, searchTerm }, dispatch] = useReducer(notesReducer, {
+    currentNoteId: undefined,
+    searchTerm: '',
+  })
   return (
-    <NotesStateContext.Provider
-      value={{ currentNoteId, searchTerm, allNotes, currentNote }}
-    >
+    <NotesStateContext.Provider value={{ currentNoteId, searchTerm }}>
       <NotesDispatchContext.Provider value={dispatch}>
         {children}
       </NotesDispatchContext.Provider>
     </NotesStateContext.Provider>
   )
-}
-
-function useNotesData() {
-  const [{ currentNoteId, searchTerm }, dispatch] = useReducer(notesReducer, {
-    currentNoteId: undefined,
-    searchTerm: '',
-  })
-  const { getAllNotesDb } = useDb()
-
-  const allNotes = useMemo(() => {
-    if (!getAllNotesDb?.length) return
-    if (!searchTerm) return getAllNotesDb
-    const filteredNotes = getAllNotesDb.filter((note) =>
-      note.text.includes(searchTerm)
-    )
-    if (!filteredNotes.length) return
-    return filteredNotes
-  }, [getAllNotesDb, searchTerm])
-
-  const currentNote = useMemo(
-    () => allNotes?.find((note) => note.id === currentNoteId),
-    [allNotes, currentNoteId]
-  )
-
-  useEffect(() => {
-    if (!allNotes?.length) return
-    if (currentNoteId === undefined || !!searchTerm)
-      dispatch({ type: 'updateNoteId', payload: allNotes[0].id })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allNotes])
-
-  return { allNotes, currentNote, currentNoteId, searchTerm, dispatch }
 }
 
 function useNotesState() {
