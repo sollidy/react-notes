@@ -39,14 +39,9 @@ export const useDb = () => {
 
   const getNotesDb = useLiveQuery(() => db.notes.reverse().toArray())
 
-  const getAllNotesDb = useLiveQuery(
-    async () => await db.notes.reverse().toArray()
-  )
-
   return {
     getNotesDb,
     getCurrentNoteDb,
-    getAllNotesDb,
     createNoteDb,
     editNoteDb,
     deleteNoteDb,
