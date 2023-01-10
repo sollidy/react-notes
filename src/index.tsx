@@ -1,4 +1,4 @@
-import 'antd/dist/antd.min.css'
+import 'antd/dist/reset.css'
 import ReactDOM from 'react-dom/client'
 
 import './assets/styles/globals.scss'
