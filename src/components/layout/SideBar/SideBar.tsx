@@ -1,5 +1,4 @@
-import { Button, Menu } from 'antd'
-import { Layout } from 'antd'
+import { Button, Layout, Menu } from 'antd'
 import { FC, useState } from 'react'
 
 import { useNotesState } from '../../../context/notes-context'
@@ -36,6 +35,7 @@ export const SideBar: FC = () => {
         mode="inline"
         items={menuItems}
         onSelect={selectMenuItem}
+        className={styles.menu}
       />
     </Sider>
   )

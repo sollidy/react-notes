@@ -3,10 +3,24 @@
   margin-bottom: 0 !important;
 
   > .contentContainer {
+    overflow-y: scroll;
+    height: 10vh;
+    width: 100%;
     background-color: white;
     padding: 24px;
     min-height: 100%;
-    width: 100%;
+
+    &::-webkit-scrollbar-track {
+      background-color: white;
+    }
+    &::-webkit-scrollbar {
+      width: 0.375rem;
+      height: 0.375rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(207, 207, 207);
+      border-radius: 0.375rem;
+    }
 
     .empty {
       margin-top: 60px !important;
