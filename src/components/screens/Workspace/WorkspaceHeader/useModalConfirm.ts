@@ -1,5 +1,6 @@
-import { Modal } from 'antd'
 import { useCallback } from 'react'
+
+import { App } from 'antd'
 
 import {
   useNotesDispatch,
@@ -7,16 +8,17 @@ import {
 } from '../../../../context/notes-context'
 import { useDb } from '../../../../hooks/useDb'
 
-const { confirm } = Modal
-
 export const useModalConfirm = () => {
-  const { deleteNoteDb } = useDb()
+  // console.log(globalThis.getSelection()!.rangeCount < 1)
 
+  const { modal } = App.useApp()
+
+  const { deleteNoteDb } = useDb()
   const { currentNoteId } = useNotesState()
   const dispatch = useNotesDispatch()
 
   const showDeleteConfirm = useCallback(() => {
-    confirm({
+    modal.confirm({
       title: 'Are you sure delete this note?',
       content: 'It is unrevokable',
       okText: 'Yes',
@@ -28,8 +30,9 @@ export const useModalConfirm = () => {
           dispatch({ type: 'updateNoteId', payload: undefined })
         }
       },
+      onCancel() {},
     })
-  }, [currentNoteId, deleteNoteDb, dispatch])
+  }, [currentNoteId, deleteNoteDb, dispatch, modal])
 
   return showDeleteConfirm
 }

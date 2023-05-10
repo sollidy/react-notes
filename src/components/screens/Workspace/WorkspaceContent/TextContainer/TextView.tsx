@@ -1,9 +1,15 @@
-import { marked } from 'marked'
 import { FC } from 'react'
+
+import { marked } from 'marked'
 
 interface ITextView {
   md?: string
 }
+
+marked.use({
+  mangle: false,
+  headerIds: false,
+})
 
 export const TextView: FC<ITextView> = ({ md = '' }) => {
   const getMarkdownText = (mdText: string) => {
