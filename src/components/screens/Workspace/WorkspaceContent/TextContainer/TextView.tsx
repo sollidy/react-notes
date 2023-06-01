@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import { marked } from 'marked'
 
 interface ITextView {
@@ -11,7 +9,7 @@ marked.use({
   headerIds: false,
 })
 
-export const TextView: FC<ITextView> = ({ md = '' }) => {
+export const TextView = ({ md = '' }: ITextView) => {
   const getMarkdownText = (mdText: string) => {
     const rawMarkup = marked(mdText)
     return { __html: rawMarkup }

@@ -1,5 +1,5 @@
 import 'easymde/dist/easymde.min.css'
-import { FC, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { SimpleMdeReact } from 'react-simplemde-editor'
 
 import { customRendererOptions } from '../../../../../config/simplemde.config'
@@ -10,7 +10,7 @@ interface ITextEdit {
   currentNote: Notes
 }
 
-export const TextEdit: FC<ITextEdit> = ({ currentNote }) => {
+export const TextEdit = ({ currentNote }: ITextEdit) => {
   const [value, setValue] = useState('')
 
   useEffect(() => {

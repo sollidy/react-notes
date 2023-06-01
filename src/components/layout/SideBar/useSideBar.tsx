@@ -1,9 +1,12 @@
 import { FileTextOutlined } from '@ant-design/icons'
-import { SelectInfo } from 'rc-menu/lib/interface'
 
 import { useNotesDispatch } from '../../../context/notes-context'
 import { useDb } from '../../../hooks/useDb'
 import { useNotes } from '../../../hooks/useNotes'
+
+interface ISelectMenu {
+  key: string
+}
 
 export const useSideBar = () => {
   const { createNoteDb } = useDb()
@@ -22,7 +25,7 @@ export const useSideBar = () => {
     dispatch({ type: 'updateSearchTerm', payload: '' })
   }
 
-  const selectMenuItem = (selectMenu: SelectInfo) => {
+  const selectMenuItem = (selectMenu: ISelectMenu) => {
     dispatch({ type: 'updateNoteId', payload: +selectMenu.key })
   }
 
